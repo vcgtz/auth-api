@@ -3,20 +3,20 @@ const { Schema, model } = require('mongoose');
 const userSchema = new Schema({
   name: {
     type: String,
-    required: [true, 'Name is required'],
+    required: [true, 'The name is required'],
   },
   lastName: {
     type: String,
-    required: [true, 'Password is required'],
+    required: [true, 'The lastname is required'],
   },
   email: {
     type: String,
-    required: [true, 'Email is required'],
+    required: [true, 'The email is required'],
     unique: true,
   },
   password: {
     type: String,
-    required: [true, 'Password is required'],
+    required: [true, 'The password is required'],
   },
   role: {
     type: String,

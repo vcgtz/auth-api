@@ -23,9 +23,9 @@ const store = async (req, res) => {
   } catch (err) {
     return res.status(500).json({
       status: 'err',
-      error: {
-        message: 'A problem has ocurred saving the user',
-      },
+      errors: [
+        { message: 'A problem has ocurred saving the user', }
+      ],
     });
   }
 
