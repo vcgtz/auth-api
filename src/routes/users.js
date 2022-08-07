@@ -12,6 +12,7 @@ router.post('/', [
   check('name').notEmpty().withMessage('The name is required'),
   check('lastName').notEmpty().withMessage('The lastname is required'),
   check('email').notEmpty().withMessage('The email is required'),
+  check('email').isEmail().withMessage('The email must be valid'),
   check('password').notEmpty().withMessage('The password is required'),
   check('email').custom(existsEmail),
   validationResults,
