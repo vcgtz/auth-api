@@ -2,7 +2,7 @@ const express = require('express');
 const { check } = require('express-validator');
 const usersController = require('../controllers/users');
 const { validationResults } = require('../middlewares/validations');
-const User = require('../models/user');
+const { existsEmail } = require('../helpers/validations');
 
 const router = express.Router();
 
@@ -13,13 +13,7 @@ router.post('/', [
   check('lastName').notEmpty().withMessage('The lastname is required'),
   check('email').notEmpty().withMessage('The email is required'),
   check('password').notEmpty().withMessage('The password is required'),
-  check('email').custom(async (value) => {
-    const user = await User.findOne({ email: value }).exec();
-
-    if (user) {
-      throw new Error('The email already exists');
-    }
-  }),
+  check('email').custom(existsEmail),
   validationResults,
 ], usersController.store);
 

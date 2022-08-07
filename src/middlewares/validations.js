@@ -11,7 +11,7 @@ const validationResults = (req, res, next) => {
     return res.status(400).json({ status: 'err', errors: messages });
   }
 
-  next();
+  return next();
 };
 
 module.exports = {
