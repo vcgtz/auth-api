@@ -41,11 +41,33 @@ const show = (req, res) =>
     method: 'show',
   });
 
-const update = (req, res) =>
-  res.json({
-    status: 'ok',
-    method: 'update',
-  });
+const update = async (req, res) => {
+  const { id } = req.params;
+  const { password, _id, ...newData } = req.body;
+
+  if (password) {
+    const salt = bcryptjs.genSaltSync();
+    newData.password = bcryptjs.hashSync(password, salt);
+  }
+
+  try {
+    const user = await User.findByIdAndUpdate(id, newData, {
+      returnDocument: 'after',
+    });
+
+    return res.json({
+      status: 'ok',
+      data: user,
+    });
+  } catch (err) {
+    return res.status(500).json({
+      status: 'err',
+      errors: [
+        { message: 'A problem has ocurred saving the user', }
+      ],
+    });
+  }
+}
 
 const destroy = (req, res) =>
   res.json({

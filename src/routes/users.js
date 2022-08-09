@@ -19,7 +19,16 @@ router.post('/', [
 ], usersController.store);
 
 router.get('/:id', usersController.show);
-router.put('/:id', usersController.update);
+
+router.put('/:id', [
+  check('name').notEmpty().withMessage('The name is required'),
+  check('lastName').notEmpty().withMessage('The lastname is required'),
+  check('email').notEmpty().withMessage('The email is required'),
+  check('email').isEmail().withMessage('The email must be valid'),
+  check('email').custom(existsEmail),
+  validationResults,
+], usersController.update);
+
 router.delete('/:id', usersController.destroy);
 
 module.exports = router;
