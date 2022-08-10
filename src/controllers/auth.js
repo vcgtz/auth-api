@@ -1,6 +1,6 @@
 const bcryptjs = require('bcryptjs');
 const { generateJWT } = require('../helpers/auth');
-const User = require("../models/user");
+const User = require('../models/user');
 
 const login = async (req, res) => {
   const { email, password } = req.body;
@@ -35,10 +35,6 @@ const login = async (req, res) => {
       errors: [{ message: 'A problem has ocurred saving the user' }],
     });
   }
-
-  return res.json({
-    ok: true
-  });
 };
 
 module.exports = {
