@@ -35,11 +35,24 @@ const store = async (req, res) => {
   });
 };
 
-const show = (req, res) =>
-  res.json({
-    status: 'ok',
-    method: 'show',
-  });
+const show = async (req, res) => {
+  try {
+    const user = await User.findById(req.params.id);
+
+    return res.json({
+      status: 'ok',
+      data: user,
+    });
+  } catch (err) {
+    return res.status(500).json({
+      status: 'err',
+      errors: [
+        { message: 'A problem has ocurred saving the user', }
+      ],
+    });
+  }
+}
+  
 
 const update = async (req, res) => {
   const { id } = req.params;

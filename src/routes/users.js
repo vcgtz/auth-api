@@ -18,7 +18,10 @@ router.post('/', [
   validationResults,
 ], usersController.store);
 
-router.get('/:id', usersController.show);
+router.get('/:id', [
+  check('id').isMongoId().withMessage('The ID is not valid'),
+  check('id').custom(existsId),
+], usersController.show);
 
 router.put('/:id', [
   check('name').notEmpty().withMessage('The name is required'),
