@@ -1,4 +1,5 @@
 const bcryptjs = require('bcryptjs');
+const { generateJWT } = require('../helpers/auth');
 const User = require("../models/user");
 
 const login = async (req, res) => {
@@ -22,7 +23,12 @@ const login = async (req, res) => {
       });
     }
 
-    return res.json({ok: true});
+    const token = await generateJWT(user.id);
+
+    return res.json({
+      status: 'ok',
+      token,
+    });
   } catch (err) {
     return res.status(500).json({
       status: 'err',
