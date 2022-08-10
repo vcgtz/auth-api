@@ -1,4 +1,4 @@
-const User = require("../models/user");
+const User = require('../models/user');
 
 const existsEmail = async (email, { req }) => {
   const userWithCurrentEmail = await User.findOne({ email }).exec();
@@ -11,7 +11,11 @@ const existsEmail = async (email, { req }) => {
   if (id) {
     const currentUser = await User.findById(id);
 
-    if (userWithCurrentEmail && currentUser && currentUser.id !== userWithCurrentEmail.id) {
+    if (
+      userWithCurrentEmail &&
+      currentUser &&
+      currentUser.id !== userWithCurrentEmail.id
+    ) {
       throw new Error('The email already exists');
     }
   }

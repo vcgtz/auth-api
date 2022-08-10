@@ -16,8 +16,7 @@ const index = async (req, res) => {
     total: users.length,
     data: users,
   });
-}
-  
+};
 
 const store = async (req, res) => {
   const { name, lastName, email, password } = req.body;
@@ -35,9 +34,7 @@ const store = async (req, res) => {
   } catch (err) {
     return res.status(500).json({
       status: 'err',
-      errors: [
-        { message: 'A problem has ocurred saving the user', }
-      ],
+      errors: [{ message: 'A problem has ocurred saving the user' }],
     });
   }
 
@@ -58,13 +55,10 @@ const show = async (req, res) => {
   } catch (err) {
     return res.status(500).json({
       status: 'err',
-      errors: [
-        { message: 'A problem has ocurred saving the user', }
-      ],
+      errors: [{ message: 'A problem has ocurred saving the user' }],
     });
   }
-}
-  
+};
 
 const update = async (req, res) => {
   const { id } = req.params;
@@ -87,12 +81,10 @@ const update = async (req, res) => {
   } catch (err) {
     return res.status(500).json({
       status: 'err',
-      errors: [
-        { message: 'A problem has ocurred saving the user', }
-      ],
+      errors: [{ message: 'A problem has ocurred saving the user' }],
     });
   }
-}
+};
 
 const destroy = async (req, res) => {
   try {
@@ -107,13 +99,10 @@ const destroy = async (req, res) => {
   } catch (err) {
     return res.status(500).json({
       status: 'err',
-      errors: [
-        { message: 'A problem has ocurred saving the user', }
-      ]
+      errors: [{ message: 'A problem has ocurred saving the user' }],
     });
   }
-}
-  
+};
 
 module.exports = {
   index,
