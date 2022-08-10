@@ -11,7 +11,7 @@ const login = async (req, res) => {
     if (!user) {
       return res.status(400).json({
         status: 'err',
-        errors: [{ message: 'Email or password is invalid' }],
+        errors: [{ message: 'Email and/or password are invalid' }],
       });
     }
 
@@ -19,7 +19,7 @@ const login = async (req, res) => {
     if (!isValidPassword) {
       return res.status(400).json({
         status: 'err',
-        errors: [{ message: 'Email or password is invalid' }],
+        errors: [{ message: 'Email and/or password are invalid' }],
       });
     }
 
