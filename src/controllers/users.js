@@ -4,16 +4,17 @@ const User = require('../models/user');
 const perPage = 10;
 
 const index = async (req, res) => {
-  const page = req.params.page || 0;
+  const page = req.params.page || 1;
 
   const users = await User.find()
     .limit(perPage)
-    .skip(page * perPage)
+    .skip((page - 1) * perPage)
     .exec();
 
   return res.json({
     status: 'ok',
     total: users.length,
+    page: +page,
     data: users,
   });
 };
