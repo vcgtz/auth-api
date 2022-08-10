@@ -21,6 +21,7 @@ router.post('/', [
 router.get('/:id', [
   check('id').isMongoId().withMessage('The ID is not valid'),
   check('id').custom(existsId),
+  validationResults,
 ], usersController.show);
 
 router.put('/:id', [
@@ -34,6 +35,10 @@ router.put('/:id', [
   validationResults,
 ], usersController.update);
 
-router.delete('/:id', usersController.destroy);
+router.delete('/:id', [
+  check('id').isMongoId().withMessage('The ID is not valid'),
+  check('id').custom(existsId),
+  validationResults,
+], usersController.destroy);
 
 module.exports = router;

@@ -82,11 +82,26 @@ const update = async (req, res) => {
   }
 }
 
-const destroy = (req, res) =>
-  res.json({
-    status: 'ok',
-    method: 'destroy',
-  });
+const destroy = async (req, res) => {
+  try {
+    const user = await User.findByIdAndDelete(req.params.id, {
+      returnDocument: 'after',
+    });
+
+    return res.json({
+      status: 'ok',
+      data: user,
+    });
+  } catch (err) {
+    return res.status(500).json({
+      status: 'err',
+      errors: [
+        { message: 'A problem has ocurred saving the user', }
+      ]
+    });
+  }
+}
+  
 
 module.exports = {
   index,
