@@ -10,10 +10,12 @@ const index = async (req, res) => {
     .limit(perPage)
     .skip((page - 1) * perPage)
     .exec();
+  const total = await User.countDocuments();
 
   return res.json({
     status: 'ok',
-    total: users.length,
+    total,
+    totalInThisPage: users.length,
     page: +page,
     data: users,
   });
