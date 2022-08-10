@@ -6,7 +6,7 @@ const { existsEmail, existsId } = require('../helpers/validations');
 
 const router = express.Router();
 
-router.get('/', usersController.index);
+router.get('/:page?', usersController.index);
 
 router.post('/', [
   check('name').notEmpty().withMessage('The name is required'),

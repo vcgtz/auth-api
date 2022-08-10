@@ -1,11 +1,23 @@
 const bcryptjs = require('bcryptjs');
 const User = require('../models/user');
 
-const index = (req, res) =>
-  res.json({
+const perPage = 10;
+
+const index = async (req, res) => {
+  const page = req.params.page || 0;
+
+  const users = await User.find()
+    .limit(perPage)
+    .skip(page * perPage)
+    .exec();
+
+  return res.json({
     status: 'ok',
-    method: 'index',
+    total: users.length,
+    data: users,
   });
+}
+  
 
 const store = async (req, res) => {
   const { name, lastName, email, password } = req.body;
