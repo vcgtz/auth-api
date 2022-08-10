@@ -11,12 +11,21 @@ const existsEmail = async (email, { req }) => {
   if (id) {
     const currentUser = await User.findById(id);
 
-    if (userWithCurrentEmail && currentUser.id !== userWithCurrentEmail.id) {
+    if (userWithCurrentEmail && currentUser && currentUser.id !== userWithCurrentEmail.id) {
       throw new Error('The email already exists');
     }
   }
 };
 
+const existsId = async (id) => {
+  const user = await User.findById(id);
+
+  if (!user) {
+    throw new Error('The user does not exist');
+  }
+};
+
 module.exports = {
   existsEmail,
+  existsId,
 };
