@@ -2,7 +2,7 @@ const express = require('express');
 const { check } = require('express-validator');
 const usersController = require('../controllers/users');
 const { validationResults } = require('../middlewares/validations');
-const { validateJWT } = require('../middlewares/auth');
+const { validateJWT, validateRol } = require('../middlewares/auth');
 const { existsEmail, existsId } = require('../helpers/validations');
 
 const router = express.Router();
@@ -27,6 +27,7 @@ router.get(
   '/:id',
   [
     validateJWT,
+    validateRol,
     check('id').isMongoId().withMessage('The ID is not valid'),
     check('id').custom(existsId),
     validationResults,

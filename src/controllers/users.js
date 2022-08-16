@@ -51,6 +51,9 @@ const show = async (req, res) => {
   try {
     const user = await User.findById(req.params.id);
 
+    // user that made the request
+    console.log(req.user);
+
     return res.json({
       status: 'ok',
       data: user,
